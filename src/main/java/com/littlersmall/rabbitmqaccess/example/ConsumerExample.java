@@ -34,6 +34,7 @@ public class ConsumerExample {
     }
 
     public DetailRes consume() {
+        DetailRes detailRes = messageConsumer.consume();
         return messageConsumer.consume();
     }
 

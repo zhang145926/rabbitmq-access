@@ -5,6 +5,8 @@ import com.littlersmall.rabbitmqaccess.MessageSender;
 import com.littlersmall.rabbitmqaccess.common.DetailRes;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -33,5 +35,15 @@ public class SenderExample {
 
     public DetailRes send(UserMessage userMessage) {
         return messageSender.send(userMessage);
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        SenderExample senderExample = ac.getBean(SenderExample.class);
+
+        UserMessage userMessage = new UserMessage();
+        userMessage.setName("111");
+        userMessage.setId(22);
+        senderExample.send(userMessage);
     }
 }
